@@ -27,19 +27,20 @@ def get_probes_and_vcf_records(
     flank_length = number of nucleotides to add either side of variant sequence."""
     header_lines, vcf_records = vcf_file_read.vcf_file_to_list(vcf_file)
     yield header_lines
-    wanted_format = _get_wanted_format(use_fail_conflict)
+    #wanted_format = _get_wanted_format(use_fail_conflict)
 
     for record in vcf_records:
-        if record.FORMAT["VFR_FILTER"] not in wanted_format:
-            yield record, None, None
-            continue
+        #if record.FORMAT["VFR_FILTER"] not in wanted_format:
+        #    yield record, None, None
+        #    continue
 
         flank_start = max(0, record.POS - flank_length)
         ref_seq = ref_seqs[record.CHROM]
-        if ref_seq[record.POS : record.POS + len(record.REF)] != record.REF:
-            record.set_format_key_value("VFR_FILTER", "REF_STRING_MISMATCH")
-            yield record, None, None
-            continue
+        assert ref_seq[record.POS : record.POS + len(record.REF)] == record.REF
+        #if ref_seq[record.POS : record.POS + len(record.REF)] != record.REF:
+        #    record.set_format_key_value("VFR_FILTER", "REF_STRING_MISMATCH")
+        #    yield record, None, None
+        #    continue
 
         flank_end = min(len(ref_seq) - 1, record.ref_end_pos() + flank_length)
         probe_allele_start = record.POS - flank_start
@@ -103,8 +104,8 @@ def evaluate_vcf_record(
     use_fail_conflict=False,
     truth_mask=None,
 ):
-    if vcf_record.FORMAT["VFR_FILTER"] not in _get_wanted_format(use_fail_conflict):
-        return
+    #if vcf_record.FORMAT["VFR_FILTER"] not in _get_wanted_format(use_fail_conflict):
+    #    return
 
     edit_dist_allele_v_ref = edit_distance.edit_distance_between_seqs(
         ref_probe.allele_seq(), alt_probe.allele_seq()
@@ -218,10 +219,10 @@ def annotate_vcf_with_probe_mapping(
 ):
     vcf_ref_seqs = utils.file_to_dict_of_seqs(vcf_ref_fasta)
     truth_ref_seqs = utils.file_to_dict_of_seqs(truth_ref_fasta)
-    vcf_with_qc = vcf_out + ".debug.vcf"
-    vcf_qc_annotate.add_qc_to_vcf(vcf_in, vcf_with_qc, want_ref_calls=use_ref_calls)
+    #vcf_with_qc = vcf_out + ".debug.vcf"
+    #vcf_qc_annotate.add_qc_to_vcf(vcf_in, vcf_with_qc, want_ref_calls=use_ref_calls)
     probes_and_vcf_reader = get_probes_and_vcf_records(
-        vcf_with_qc, vcf_ref_seqs, flank_length, use_fail_conflict=use_fail_conflict,
+        vcf_in, vcf_ref_seqs, flank_length, use_fail_conflict=use_fail_conflict,
     )
 
     # Some notes on the mapper options...
@@ -296,5 +297,5 @@ def annotate_vcf_with_probe_mapping(
     if map_outfile is not None:
         f_map.close()
 
-    if not debug:
-        os.unlink(vcf_with_qc)
+    #if not debug:
+    #    os.unlink(vcf_with_qc)

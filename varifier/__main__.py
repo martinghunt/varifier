@@ -77,6 +77,13 @@ def main(args=None):
         "--force", help="Replace outdir if it already exists", action="store_true"
     )
     subparser_vcf_eval.add_argument(
+        "--merge_distance",
+        type=int,
+        help="Merge variants that are within this distance from each other. Use 0 for no merging [%(default)s]",
+        metavar="INT",
+        default=10,
+    )
+    subparser_vcf_eval.add_argument(
         "--ref_mask",
         help="BED file of ref regions to mask. Any variants in the VCF overlapping the mask are removed at the start of the pipeline",
         metavar="FILENAME",

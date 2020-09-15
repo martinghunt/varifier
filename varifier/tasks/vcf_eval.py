@@ -15,4 +15,5 @@ def run(options):
         truth_mask_bed_file=options.truth_mask,
         discard_ref_calls=not options.use_ref_calls,
         max_recall_ref_len=options.max_recall_ref_len,
+        cluster_boundary_size=options.merge_distance,
     )

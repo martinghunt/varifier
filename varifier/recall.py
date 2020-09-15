@@ -11,14 +11,14 @@ def _vcf_file_to_dict(vcf_file, pass_only=True):
     """Loads VCF file. Returns a dictionary of sequence name -> sorted list
     by position of variants"""
     records = {}
-    wanted_format = {"PASS"}
-    if not pass_only:
-        wanted_format.add("FAIL_BUT_TEST")
+    #wanted_format = {"PASS"}
+    #if not pass_only:
+    #    wanted_format.add("FAIL_BUT_TEST")
 
     header_lines, vcf_records = vcf_file_read.vcf_file_to_list(vcf_file)
     for record in vcf_records:
-        if record.FORMAT["VFR_FILTER"] not in wanted_format:
-            continue
+        #if record.FORMAT["VFR_FILTER"] not in wanted_format:
+        #    continue
 
         if record.CHROM not in records:
             records[record.CHROM] = []
@@ -88,28 +88,47 @@ def get_recall(
     else:
         assert truth_fasta is None
 
-    vcfs_out = {}
-    for all_or_filt in "ALL", "FILT":
-        run_outdir = os.path.join(outdir, all_or_filt)
-        os.mkdir(run_outdir)
-        mutated_ref_fasta = os.path.join(run_outdir, "00.ref_with_mutations_added.fa")
-        apply_variants_to_genome(
-            ref_fasta, vcf_to_test, mutated_ref_fasta, pass_only=all_or_filt == "FILT"
-        )
+    #vcfs_out = {}
+    #for all_or_filt in "ALL", "FILT":
+    #    run_outdir = os.path.join(outdir, all_or_filt)
+    #    os.mkdir(run_outdir)
+    #    mutated_ref_fasta = os.path.join(run_outdir, "00.ref_with_mutations_added.fa")
+    #    apply_variants_to_genome(
+    #        ref_fasta, vcf_to_test, mutated_ref_fasta, pass_only=all_or_filt == "FILT"
+    #    )
 
-        # For each record in the truth VCF, make a probe and map to the mutated genome
-        vcfs_out[all_or_filt] = os.path.join(
-            run_outdir, "02.truth.probe_mapped_to_mutated_genome.vcf"
-        )
-        map_outfile = (
-            os.path.join(run_outdir, "02.probe_map_debug.txt") if debug else None
-        )
-        probe_mapping.annotate_vcf_with_probe_mapping(
-            truth_vcf,
-            ref_fasta,
-            mutated_ref_fasta,
-            flank_length,
-            vcfs_out[all_or_filt],
-            map_outfile=map_outfile,
-        )
-    return vcfs_out["ALL"], vcfs_out["FILT"]
+    #    # For each record in the truth VCF, make a probe and map to the mutated genome
+    #    vcfs_out[all_or_filt] = os.path.join(
+    #        run_outdir, "02.truth.probe_mapped_to_mutated_genome.vcf"
+    #    )
+    #    map_outfile = (
+    #        os.path.join(run_outdir, "02.probe_map_debug.txt") if debug else None
+    #    )
+    #    probe_mapping.annotate_vcf_with_probe_mapping(
+    #        truth_vcf,
+    #        ref_fasta,
+    #        mutated_ref_fasta,
+    #        flank_length,
+    #        vcfs_out[all_or_filt],
+    #        map_outfile=map_outfile,
+    #    )
+
+    mutated_ref_fasta = os.path.join(outdir, "ref_with_mutations_added.fa")
+    apply_variants_to_genome(
+        ref_fasta, vcf_to_test, mutated_ref_fasta, pass_only=False,
+    )
+
+    # For each record in the truth VCF, make a probe and map to the mutated genome
+    vcf_out = os.path.join(outdir, "recall.vcf")
+    map_outfile = (
+        os.path.join(outdir, "probe_map_debug.txt") if debug else None
+    )
+    probe_mapping.annotate_vcf_with_probe_mapping(
+        truth_vcf,
+        ref_fasta,
+        mutated_ref_fasta,
+        flank_length,
+        vcf_out,
+        map_outfile=map_outfile,
+    )
+    return vcf_out
