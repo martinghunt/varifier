@@ -16,18 +16,10 @@ def edit_distance_from_aln_strings(str1, str2):
     Returns the edit distance between the sequences"""
     assert len(str1) == len(str2)
     edit_distance = 0
-    in_gap = False
 
     for i, char1 in enumerate(str1):
-        if char1 == "-" or str2[i] == "-":
-            if not in_gap:
-                in_gap = True
-                edit_distance += 1
-        else:
-            in_gap = False
-
-            if char1 != str2[i]:
-                edit_distance += 1
+        if char1 != str2[i]:
+            edit_distance += 1
 
     return edit_distance
 

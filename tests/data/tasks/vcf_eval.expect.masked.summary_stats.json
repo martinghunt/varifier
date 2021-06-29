@@ -9,8 +9,8 @@
   },
   "Precision": {
     "EDIT_DIST_COUNTS": {
-      "denominator": 9,
-      "numerator": 8
+      "denominator": 11,
+      "numerator": 10
     },
     "FP": {
       "Count": 1,
@@ -18,12 +18,12 @@
       "SUM_EDIT_DIST": 1
     },
     "Precision": 0.88888889,
-    "Precision_edit_dist": 0.88888889,
+    "Precision_edit_dist": 0.90909091,
     "Precision_frac": 0.88888889,
     "TP": {
       "Count": 8,
       "SUM_ALLELE_MATCH_FRAC": 8.0,
-      "SUM_EDIT_DIST": 8
+      "SUM_EDIT_DIST": 10
     },
     "UNUSED": {
       "CONFLICT": 0,
@@ -33,8 +33,8 @@
   },
   "Recall": {
     "EDIT_DIST_COUNTS": {
-      "denominator": 12,
-      "numerator": 8
+      "denominator": 14,
+      "numerator": 10
     },
     "FN": {
       "Count": 4,
@@ -42,12 +42,12 @@
       "SUM_EDIT_DIST": 4
     },
     "Recall": 0.66666667,
-    "Recall_edit_dist": 0.66666667,
+    "Recall_edit_dist": 0.71428571,
     "Recall_frac": 0.75,
     "TP": {
       "Count": 8,
       "SUM_ALLELE_MATCH_FRAC": 8.0,
-      "SUM_EDIT_DIST": 8
+      "SUM_EDIT_DIST": 10
     },
     "UNUSED": {
       "CONFLICT": 0,

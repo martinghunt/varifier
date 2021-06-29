@@ -17,19 +17,19 @@ def test_edit_distance_from_aln_strings():
     assert edit_distance.edit_distance_from_aln_strings("A", "A") == 0
     assert edit_distance.edit_distance_from_aln_strings("A", "C") == 1
     assert edit_distance.edit_distance_from_aln_strings("A-G", "ACG") == 1
-    assert edit_distance.edit_distance_from_aln_strings("A--G", "ACTG") == 1
+    assert edit_distance.edit_distance_from_aln_strings("A--G", "ACTG") == 2
     assert edit_distance.edit_distance_from_aln_strings("ACG", "A-G") == 1
-    assert edit_distance.edit_distance_from_aln_strings("ACTG", "A--G") == 1
-    assert edit_distance.edit_distance_from_aln_strings("ACTC", "A--G") == 2
-    assert edit_distance.edit_distance_from_aln_strings("A--G", "ACTC") == 2
-    assert edit_distance.edit_distance_from_aln_strings("A-TG", "AC-G") == 1
-    assert edit_distance.edit_distance_from_aln_strings("AC-G", "A-TG") == 1
+    assert edit_distance.edit_distance_from_aln_strings("ACTG", "A--G") == 2
+    assert edit_distance.edit_distance_from_aln_strings("ACTC", "A--G") == 3
+    assert edit_distance.edit_distance_from_aln_strings("A--G", "ACTC") == 3
+    assert edit_distance.edit_distance_from_aln_strings("A-TG", "AC-G") == 2
+    assert edit_distance.edit_distance_from_aln_strings("AC-G", "A-TG") == 2
     assert edit_distance.edit_distance_from_aln_strings("A--G", "A-CG") == 1
     assert edit_distance.edit_distance_from_aln_strings("A-CG", "A--G") == 1
-    assert edit_distance.edit_distance_from_aln_strings("A--TCAC-G", "AGT--ACTG") == 2
-    assert edit_distance.edit_distance_from_aln_strings("AGT--ACTG", "A--TCAC-G") == 2
-    assert edit_distance.edit_distance_from_aln_strings("A--TCAC-GG", "AGT--ACTG-") == 3
-    assert edit_distance.edit_distance_from_aln_strings("AGT--ACTG-", "A--TCAC-GG") == 3
+    assert edit_distance.edit_distance_from_aln_strings("A--TCAC-G", "AGT--ACTG") == 5
+    assert edit_distance.edit_distance_from_aln_strings("AGT--ACTG", "A--TCAC-G") == 5
+    assert edit_distance.edit_distance_from_aln_strings("A--TCAC-GG", "AGT--ACTG-") == 6
+    assert edit_distance.edit_distance_from_aln_strings("AGT--ACTG-", "A--TCAC-GG") == 6
 
 
 def test_edit_distance_between_seqs():

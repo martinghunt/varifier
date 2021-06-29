@@ -3,8 +3,8 @@
 ##contig=<ID=ref,length=430>
 ##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
 ##bcftools_normVersion=1.10.2 (pysam)+htslib-1.10.2 (pysam)
-##bcftools_normCommand=norm -c x -d any -f /home/mhunt/git/varifier/tests/data/recall/get_recall.ref.fa -o /tmp/tmpvsytvx9f tmp.get_recall/truth_vcf/03.probe_filtered.vcf; Date=Tue May 25 15:37:21 2021
-##bcftools_normCommand=norm -c x -d any -f /home/mhunt/git/varifier/tests/data/recall/get_recall.ref.fa -o /tmp/tmp7zqsjf35 tmp.get_recall/truth_vcf/04.truth.vcf; Date=Tue May 25 15:37:21 2021
+##bcftools_normCommand=norm -c x -d any -f /home/mhunt/git/varifier/tests/data/recall/get_recall.ref.fa -o /tmp/tmpe5adojyy tmp.get_recall/truth_vcf/03.probe_filtered.vcf; Date=Tue Jun 29 15:58:56 2021
+##bcftools_normCommand=norm -c x -d any -f /home/mhunt/git/varifier/tests/data/recall/get_recall.ref.fa -o /tmp/tmpvx7oj0_f tmp.get_recall/truth_vcf/04.truth.vcf; Date=Tue Jun 29 15:58:56 2021
 ##FORMAT=<ID=VFR_IN_MASK,Number=1,Type=String,Description="Whether or not the variant is in the truth genome mask">
 ##FORMAT=<ID=VFR_RESULT,Number=1,Type=String,Description="FP, TP, or Partial_TP when part of the allele matches the truth reference">
 ##FORMAT=<ID=VFR_ALLELE_LEN,Number=1,Type=Integer,Description="Number of positions in allele that were checked if they match the truth">
@@ -27,4 +27,4 @@ ref	250	8	G	C	.	PASS	.	GT:VFR_ED_RA:VFR_ED_TR:VFR_ED_TA:VFR_ALLELE_LEN:VFR_ALLEL
 ref	300	9	AT	A	.	PASS	.	GT:VFR_ED_RA:VFR_ED_TR:VFR_ED_TA:VFR_ALLELE_LEN:VFR_ALLELE_MATCH_COUNT:VFR_ALLELE_MATCH_FRAC:VFR_IN_MASK:VFR_RESULT	1/1:1:1:0:1:1:1.0:0:TP
 ref	302	10	GC	G	.	PASS	.	GT:VFR_ED_RA:VFR_ED_TR:VFR_ED_TA:VFR_ALLELE_LEN:VFR_ALLELE_MATCH_COUNT:VFR_ALLELE_MATCH_FRAC:VFR_IN_MASK:VFR_RESULT	1/1:1:1:0:1:1:1.0:0:TP
 ref	306	11	AT	A	.	PASS	.	GT:VFR_ED_RA:VFR_ED_TR:VFR_ED_TA:VFR_ALLELE_LEN:VFR_ALLELE_MATCH_COUNT:VFR_ALLELE_MATCH_FRAC:VFR_IN_MASK:VFR_RESULT	1/1:1:1:0:1:1:1.0:0:TP
-ref	309	12	G	GAGA	.	PASS	.	GT:VFR_ED_RA:VFR_ED_TR:VFR_ED_TA:VFR_ALLELE_LEN:VFR_ALLELE_MATCH_COUNT:VFR_ALLELE_MATCH_FRAC:VFR_IN_MASK:VFR_RESULT	1/1:1:0:0:4:4:1.0:0:TP
+ref	309	12	G	GAGA	.	PASS	.	GT:VFR_ED_RA:VFR_ED_TR:VFR_ED_TA:VFR_ALLELE_LEN:VFR_ALLELE_MATCH_COUNT:VFR_ALLELE_MATCH_FRAC:VFR_IN_MASK:VFR_RESULT	1/1:3:0:0:4:4:1.0:0:TP
